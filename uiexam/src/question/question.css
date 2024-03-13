@@ -1,0 +1,152 @@
+/* General Styles */
+
+  .question-section{
+    display:flex;
+    justify-content: space-around;
+    margin: 10px;
+  }
+  /* Header Styles */
+  .oliveboard {
+    background-color: #2196f3;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .oliveboard div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .oliveboard img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Section Styles */
+  .sections {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  /* Question Styles */
+  .question-container {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .question-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .question-description {
+    margin-bottom: 20px;
+  }
+  
+  .question-options {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .question-options div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.question-options label {
+  margin-left: 8px;
+}
+  /* .question-options label {
+    display: block;
+    margin-bottom: 10px;
+  } */
+  
+  /* Button Styles */
+  button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Legend Styles */
+  .legend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .legend div {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .legend div:before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .legend .answered:before {
+    background-color: green;
+  }
+  
+  .legend .not-answered:before {
+    background-color: red;
+  }
+  
+  .legend .marked:before {
+    background-color: purple;
+  }
+  
+  /* Question Palette Styles */
+  .question-palette {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .question-palette button {
+    width: 30px;
+    height: 40px;
+    border-radius: 50%;
+    /* margin: 5px; */
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+  
+  .question-palette button.active {
+    background-color: green;
+    color: white;
+  }
+  .question-palette button.marked {
+    background-color: purple;
+    color: white;
+}
