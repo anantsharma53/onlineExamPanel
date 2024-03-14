@@ -5,7 +5,7 @@ import './question.css'
 const QuestionComponent = ({ questions }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOptions, setSelectedOptions] = useState(new Array(questions.length).fill(null));
-    const [timer, setTimer] = useState(20); // 15 minutes in seconds
+    const [timer, setTimer] = useState(3600); // 15 minutes in seconds
     const [timerExpired, setTimerExpired] = useState(false);
     useEffect(() => {
         let interval;
