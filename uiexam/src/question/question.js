@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './question.css'
 
 
 const QuestionComponent = ({ questions }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOptions, setSelectedOptions] = useState(new Array(questions.length).fill(null));
+    const [timer, setTimer] = useState(20); // 15 minutes in seconds
+    const [timerExpired, setTimerExpired] = useState(false);
+    useEffect(() => {
+        let interval;
+        if (timer > 0) {
+            interval = setInterval(() => {
+                setTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+        } else {
+            setTimerExpired(true);
+            clearInterval(interval);
+        }
 
+        return () => clearInterval(interval);
+    }, [timer]);
     const handleOptionChange = (optionIndex) => {
         const updatedOptions = [...selectedOptions];
         updatedOptions[currentQuestion] = optionIndex;
@@ -38,16 +52,16 @@ const QuestionComponent = ({ questions }) => {
             <div className="sections">
 
                 <div>
-                    <h2>Reasoning</h2>
+                    <h2>Attempt All Question No Negative Marks</h2>
                 </div>
                 {/* <div>Numerical Ability</div> */}
                 <div>
-                    <span>Time Left: 44:57</span>
-                    <button>Pause Test</button>
+                    <h2>Time Left: {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' : ''}{timer % 60}</h2>
+                    {/* <button>Pause Test</button> */}
                 </div>
             </div>
             <div className="question-section">
-                <div className="question-container" style={{width:'85%',height: '70vh'}}>
+                <div className="question-container" style={{ width: '85%', height: '70vh' }}>
 
                     <div className="question-header">Question No {currentQuestion + 1}</div>
                     <hr />
@@ -61,6 +75,7 @@ const QuestionComponent = ({ questions }) => {
                     <div className="question-options">
                         {questions[currentQuestion].options.map((option, index) => (
                             <div key={index} style={{ display: 'flex' }}>
+                                <label>{index + 1}&nbsp;&nbsp;</label>
                                 <input
                                     type="radio"
                                     name="option"
@@ -72,7 +87,7 @@ const QuestionComponent = ({ questions }) => {
                             </div>
                         ))}
                     </div>
-                    <div style={{marginTop:'10%', textAlign:'center'}}>
+                    <div style={{ marginTop: '10%', textAlign: 'center' }}>
                         <button disabled={currentQuestion === 0} onClick={handlePreviousQuestion}>
                             Previous
                         </button>
@@ -109,29 +124,35 @@ const QuestionComponent = ({ questions }) => {
                         <div className="marked">
                             <span>Marked</span>
                         </div>
+
                         {/* <span>79 Not Visited</span> */}
                     </div>
 
                     <div >
-                        <div>
+                        {/* <div>
                             <span>Question Palette:</span>
-                        </div>
+                        </div> */}
                         <div className="question-palette">
-                            {questions.map((_, index) => (
-                                <button
-                                    key={index}
-                                    className={
-                                        selectedOptions[index] === null
-                                            ? ''
-                                            : selectedOptions[index] === -1
-                                                ? 'marked'
-                                                : 'active'
-                                    }
-                                    onClick={() => handleQuestionPaletteClick(index)}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
+                            <div className="button-grid">
+                                {Array.from({ length: 100 }, (_, index) => (
+                                    <button
+                                        key={index}
+                                        className={
+                                            index < questions.length
+                                                ? selectedOptions[index] === null
+                                                    ? ''
+                                                    : selectedOptions[index] === -1
+                                                        ? 'marked'
+                                                        : 'active'
+                                                : 'disabled'
+                                        }
+                                        onClick={() => index < questions.length && handleQuestionPaletteClick(index)}
+                                        disabled={index >= questions.length}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 

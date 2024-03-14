@@ -21,7 +21,9 @@ function ExamPanal(){
         <div className="examContainer">
             <Navbar />
             {showmodleLoginPage && <Instruction setShowModleLoginPage={setShowModleLoginPage} />} 
-          <QuestionComponent questions={questions} />;
+            {showmodleLoginPage?<></>:
+            <QuestionComponent questions={questions} />}
+          
         </div>
         </>
     );
